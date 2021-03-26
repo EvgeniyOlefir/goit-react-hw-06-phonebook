@@ -1,8 +1,11 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
+import actions from '../../redux/actions';
 import s from './Filter.module.css';
+// import { ReactComponent } from '*.svg';
 
-export default function Filter({ value, onInputChange }) {
+const Filter = ({ value, onInputChange }) => {
   const id = uuidv4();
   return (
     <div className={s.filter}>
@@ -18,4 +21,14 @@ export default function Filter({ value, onInputChange }) {
       />
     </div>
   );
-}
+};
+
+const mapStateToProps = state => ({
+  value: state.phonebook.filter,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onChange: e => dispatch(actions.filterChange(e.target.value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
