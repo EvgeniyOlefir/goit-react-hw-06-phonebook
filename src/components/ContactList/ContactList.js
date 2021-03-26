@@ -1,8 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import ContactListItem from './ContactListItem';
+import { connect } from 'react-redux';
+import actions from '../../redux/actions';
 import s from './ContactList.module.css';
 
-export default function ContactList({ contacts, handleDeleteContact }) {
+const ContactList = ({ contacts, handleDeleteContact }) => {
   return (
     <ul className={s.contactList}>
       {contacts.map(({ id, name, number }) => (
@@ -16,4 +18,14 @@ export default function ContactList({ contacts, handleDeleteContact }) {
       ))}
     </ul>
   );
-}
+};
+
+const mapStateToProps = state => ({
+  contacts: state.phonebook.contacts,
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleDeleteContact: id => dispatch(actions.deleteContact(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
