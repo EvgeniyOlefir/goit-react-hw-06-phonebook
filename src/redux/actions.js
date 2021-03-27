@@ -20,4 +20,5 @@ const changeFilter = value => ({
   payload: value,
 });
 
+// eslint-disable-next-line
 export default { addContact, deleteContact, changeFilter };

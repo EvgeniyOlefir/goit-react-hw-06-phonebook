@@ -20,8 +20,24 @@ const ContactList = ({ contacts, handleDeleteContact }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  contacts: state.phonebook.contacts,
+const getVisibleContacts = (allContacts, filter) => {
+  const normalizedFilter = filter.toLowerCase();
+  return allContacts.filter(({ name }) =>
+    name.toLowerCase().includes(normalizedFilter),
+  );
+};
+
+// const mapStateToProps = state => {
+//   const { filter, contacts } = state.phonebook;
+
+//   const visibleContacts = getVisibleContacts(contacts, filter);
+//   return {
+//     contacts: visibleContacts,
+//   };
+// };
+
+const mapStateToProps = ({ phonebook: { contacts, filter } }) => ({
+  contacts: getVisibleContacts(contacts, filter),
 });
 
 const mapDispatchToProps = dispatch => ({
