@@ -3,9 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions';
 import s from './Filter.module.css';
-// import { ReactComponent } from '*.svg';
 
-const Filter = ({ value, onInputChange }) => {
+const ContactFilter = ({ value, onInputChange }) => {
   const id = uuidv4();
   return (
     <div className={s.filter}>
@@ -28,7 +27,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onChange: e => dispatch(actions.filterChange(e.target.value)),
+  onInputChange: e => dispatch(actions.changeFilter(e.target.value)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactFilter);
