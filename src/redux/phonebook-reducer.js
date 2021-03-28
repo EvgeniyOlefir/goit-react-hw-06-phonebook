@@ -8,14 +8,9 @@ const contacts = createReducer([], {
     state.filter(({ id }) => id !== payload),
 });
 
-const filter = (state = '', { type, payload }) => {
-  switch (type) {
-    case [actions.changeFilter]:
-      return payload;
-    default:
-      return state;
-  }
-};
+const filter = createReducer('', {
+  [actions.changeFilter]: (_, { payload }) => payload,
+});
 
 export default combineReducers({
   contacts,
