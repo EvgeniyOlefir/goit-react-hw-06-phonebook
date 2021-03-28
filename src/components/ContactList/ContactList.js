@@ -22,6 +22,7 @@ const ContactList = ({ contacts, handleDeleteContact }) => {
 
 const getVisibleContacts = (allContacts, filter) => {
   const normalizedFilter = filter.toLowerCase();
+
   return allContacts.filter(({ name }) =>
     name.toLowerCase().includes(normalizedFilter),
   );

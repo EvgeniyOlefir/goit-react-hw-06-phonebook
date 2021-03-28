@@ -1,8 +1,4 @@
-import {
-  configureStore,
-  getDefaultMiddleware,
-  combineReducers,
-} from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import {
   persistStore,
@@ -17,11 +13,6 @@ import {
 import storage from 'redux-persist/lib/storage';
 import contactReducer from './phonebook-reducer';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-};
-
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
@@ -31,14 +22,16 @@ const middleware = [
   logger,
 ];
 
-const rootReducer = combineReducers({
-  phonebook: contactReducer,
-});
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const phonebookPersistConfig = {
+  key: 'phonebook',
+  storage,
+  blacklist: ['filter'],
+};
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    phonebook: persistReducer(phonebookPersistConfig, contactReducer),
+  },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
 });
