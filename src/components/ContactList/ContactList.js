@@ -27,15 +27,6 @@ const getVisibleContacts = (allContacts, filter) => {
   );
 };
 
-// const mapStateToProps = state => {
-//   const { filter, contacts } = state.phonebook;
-
-//   const visibleContacts = getVisibleContacts(contacts, filter);
-//   return {
-//     contacts: visibleContacts,
-//   };
-// };
-
 const mapStateToProps = ({ phonebook: { contacts, filter } }) => ({
   contacts: getVisibleContacts(contacts, filter),
 });

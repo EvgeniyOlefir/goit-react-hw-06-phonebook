@@ -66,8 +66,12 @@ class ContactForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: value => dispatch(actions.addContact(value)),
+const mapStateToProps = state => ({
+  contacts: state.phonebook.contacts,
 });
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+const mapDispatchToProps = dispatch => ({
+  onSubmit: (name, number) => dispatch(actions.addContact(name, number)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
